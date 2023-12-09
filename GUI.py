@@ -1,7 +1,7 @@
 import streamlit as st
 from MedicalDiagnosisApplication import get_diagnosis, get_diseases_by_medication, get_doctors_by_specialty, diseases, doctors, patients
-
-# Construiți interfața cu Streamlit
+logo = 'preview.png'
+st.image(logo, width=100)
 st.title("Sistem de Interogare a Bazei de Cunoștințe Medicale")
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Diagnosticare", "Istoric Medical", "Informații Pacient", "Informații Doctor", "Boli și Medicamente"])

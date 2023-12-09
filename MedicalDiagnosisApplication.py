@@ -1,6 +1,5 @@
 from MedicalKnowledgeBaseParser import MedicalKnowledgeBaseParser
 
-# Inițializăm parserul (presupunând că acesta este salvat într-un fișier medical_knowledge_base_parser.py)
 parser = MedicalKnowledgeBaseParser('medical_knowledge_base.xml')
 diseases = parser.get_diseases()
 doctors = parser.get_doctors()
