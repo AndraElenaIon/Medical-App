@@ -1,0 +1,63 @@
+<medicalKnowledgeBase>
+    <diseases>
+        <disease id="d1" name="Gripa">
+            <symptoms>
+                <symptom>febra</symptom>
+                <symptom>tuse</symptom>
+                <symptom>stranut</symptom>
+            </symptoms>
+        </disease>
+        <disease id="d2" name="Alergie">
+            <symptoms>
+                <symptom>stranut</symptom>
+                <symptom>mancarime</symptom>
+            </symptoms>
+        </disease>
+          <disease id="d3" name="Infectie">
+            <symptoms>
+                <symptom>febra</symptom>
+                <symptom>durere locala</symptom>
+            </symptoms>
+        </disease>
+
+        <!-- Mai multe boli și simptome -->
+    </diseases>
+
+    <doctors>
+        <doctor id="doc1" name="Dr. Popescu" specialty="Medicina generala"/>
+        <doctor id="doc2" name="Dr. Ionescu" specialty="Alergologie"/>
+        <!-- Mai mulți doctori -->
+    </doctors>
+
+    <patients>
+        <patient id="p1" name="Ion Vasile" assignedDoctor="doc1">
+            <diagnoses>
+                <diagnosis>d1</diagnosis> <!-- Referință la boala "Gripa" -->
+            </diagnoses>
+        </patient>
+        <patient id="p2" name="Maria Popescu" assignedDoctor="doc2">
+            <diagnoses>
+                <diagnosis>d2</diagnosis> <!-- Referință la boala "Alergie" -->
+            </diagnoses>
+        </patient>
+        <!-- Mai mulți pacienți -->
+    </patients>
+
+    <rules>
+        <rule>
+            <if>
+                <symptom>febra</symptom>
+                <symptom>tuse</symptom>
+            </if>
+            <then>disease="d1"</then> <!-- Referință la boala "Gripa" -->
+        </rule>
+        <rule>
+            <if>
+                <symptom>stranut</symptom>
+                <symptom>mancarime</symptom>
+            </if>
+            <then>disease="d2"</then> <!-- Referință la boala "Alergie" -->
+        </rule>
+        <!-- Mai multe reguli -->
+    </rules>
+</medicalKnowledgeBase>
