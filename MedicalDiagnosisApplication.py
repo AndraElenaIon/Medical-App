@@ -8,6 +8,18 @@ doctors = parser.get_doctors()
 patients = parser.get_patients()
 rules = parser.get_rules()
 
+# Funcții ajutătoare pentru noile funcționalități
+def get_diseases_by_medication(medication):
+    diseases_treated = []
+    for rule in rules:
+        if medication in rule['if']:
+            disease_id = rule['then']
+            diseases_treated.append(diseases[disease_id]['name'])
+    return diseases_treated
+
+def get_doctors_by_specialty(specialty):
+    return [d['name'] for d in doctors.values() if d['specialty'] == specialty]
+
 # Functie pentru determinarea diagnosticului
 def get_diagnosis(selected_symptoms):
     certain_diagnosis = None
@@ -26,12 +38,9 @@ def get_diagnosis(selected_symptoms):
     possible_diagnoses.discard(certain_diagnosis)
 
     return certain_diagnosis, list(possible_diagnoses)
+# Interfața Streamlit pentru noile funcționalități
 
-
-# Interfața Streamlit
-st.title("Sistem de Interogare a Bazei de Cunoștințe Medicale")
-
-# Alegerea simptomelor și afișarea diagnosticului
+#1.Alegerea simptomelor și afișarea diagnosticului
 st.header("Diagnosticare pe baza simptomelor")
 selected_symptoms = st.multiselect("Selectați simptomele:",
                                    list(set(sum([d['symptoms'] for d in diseases.values()], []))))
@@ -48,23 +57,67 @@ if st.button("Obțineți Diagnosticul"):
     else:
         st.info("Nu există alte diagnostice posibile.")
 
-# Afișarea doctorului pentru un pacient
-st.header("Aflați doctorul asociat unui pacient")
-patient_name = st.text_input("Introduceți numele pacientului:")
-if st.button("Afișați Doctorul"):
-    patient = next((p for p in patients.values() if p['name'] == patient_name), None)
+#2.Istoric medical/pacient
+st.header("Vizualizare Istoric Medical")
+patient_name_for_history = st.text_input("Introduceți numele pacientului pentru istoricul medical:")
+if st.button("Afișați Istoricul Medical"):
+    patient = next((p for p in patients.values() if p['name'] == patient_name_for_history), None)
     if patient:
-        doctor = doctors[patient['assignedDoctor']]
-        st.write(f"Doctorul asociat este: {doctor['name']} ({doctor['specialty']})")
+        doctor = doctors.get(patient['assignedDoctor'], None)
+        doctor_name = doctor['name'] if doctor else "Doctor necunoscut"
+        st.write(f"Istoricul medical al pacientului {patient['name']}:")
+        st.write(f"Doctorul asociat: {doctor_name}")
+        for condition in patient['conditions']:
+            st.write(f"- Boala: {condition['name']}")
+            st.write(f"- Tratament: {condition['medication']} ({condition['duration']})")
     else:
         st.write("Pacientul nu a fost găsit.")
 
-# Afișarea pacienților unui doctor și specializarea acestuia
-st.header("Afișați pacienții unui doctor și specializarea acestuia")
-doctor_name = st.selectbox("Selectați doctorul:", [d['name'] for d in doctors.values()])
-if st.button("Afișați Pacienții"):
-    selected_doctor = next((doc_id for doc_id, d in doctors.items() if d['name'] == doctor_name), None)
-    if selected_doctor:
-        associated_patients = [p['name'] for p in patients.values() if p['assignedDoctor'] == selected_doctor]
-        st.write(f"Pacienți asociati cu Dr. {doctor_name}: {', '.join(associated_patients)}")
-        st.write(f"Specializarea: {doctors[selected_doctor]['specialty']}")
+#2.1Informatii personale pacient
+st.header("Vizualizare Informații Personale ale Pacientului")
+patient_name_for_info = st.text_input("Introduceți numele pacientului pentru informații personale:")
+if st.button("Afișați Informațiile Personale"):
+    patient = next((p for p in patients.values() if p['name'] == patient_name_for_info), None)
+    if patient:
+        st.write(f"Informații personale pentru {patient['name']}:")
+        st.write(f"Contact: {patient['contact']}")
+        st.write(f"Vârstă: {patient['age']}")
+        st.write(f" Sex: {patient['sex']}")
+    else:
+        st.write("Pacientul nu a fost găsit.")
+
+# 3. Afișarea informațiilor despre doctor
+st.header("Informații despre Doctor")
+doctor_name_input = st.text_input("Introduceți numele doctorului pentru informații:")
+if st.button("Afișați Informațiile Doctorului"):
+    doctor = next((d for d in doctors.values() if d['name'] == doctor_name_input), None)
+    if doctor:
+        st.write(f"Nume: {doctor['name']}")
+        st.write(f"Contact: {doctor['contact']}")
+        st.write(f"Specializare: {doctor['specialty']}")
+        st.write(f"Rating: {doctor['rating']}")
+        st.write("Abilități:")
+        for skill in doctor['skills']:
+            st.write(f"- {skill}")
+    else:
+        st.write("Doctorul nu a fost găsit.")
+
+# 4. Afișarea doctorilor pe specializare
+st.header("Doctori pe Specializare")
+selected_specialty = st.selectbox("Selectați specializarea:", list(set(d['specialty'] for d in doctors.values())))
+if st.button("Afișați Doctorii"):
+    doctors_list = get_doctors_by_specialty(selected_specialty)
+    if doctors_list:
+        st.write(", ".join(doctors_list))
+    else:
+        st.write("Nu există doctori pentru această specializare.")
+
+# 5. Afișarea bolilor tratate de un medicament
+st.header("Boli tratate de un Medicament")
+medication_input = st.text_input("Introduceți numele medicamentului:")
+if st.button("Afișați Bolile Tratate"):
+    treated_diseases = get_diseases_by_medication(medication_input)
+    if treated_diseases:
+        st.write(", ".join(treated_diseases))
+    else:
+        st.write("Nu există boli tratate de acest medicament in baza de date.")
