@@ -129,7 +129,7 @@
         <medication id="med2">
             <name>Zyrtec</name>
         </medication>
-        <!-- Mai multe medicamente și afecțiuni asociate -->
+        <!-- Mai multe medicamente și afecțiuni asociate todo-->
     </medications>
 
     <rules>
@@ -138,40 +138,40 @@
                 <symptom>febra</symptom>
                 <symptom>tuse</symptom>
             </if>
-            <then>disease="d1"</then> <!-- Referință la boala "Gripa" -->
+            <then>disease="d1"</then>
         </rule>
         <rule>
             <if>
                 <symptom>stranut</symptom>
                 <symptom>mancarime</symptom>
             </if>
-            <then>disease="d2"</then> <!-- Referință la boala "Alergie" -->
+            <then>disease="d2"</then>
         </rule>
 
         <rule>
             <if>
                 <medication>Paracetamol</medication>
             </if>
-            <then>disease="d1"</then> <!-- Gripa -->
+            <then>disease="d1"</then>
         </rule>
         <rule>
             <if>
                 <medication>Paracetamol</medication>
             </if>
-            <then>disease="d3"</then> <!-- Infectie -->
+            <then>disease="d3"</then>
         </rule>
         <rule>
             <if>
                 <medication>Paracetamol</medication>
             </if>
-            <then>disease="d2"</then> <!-- Durere -->
+            <then>disease="d2"</then>
         </rule>
         <rule>
             <if>
                 <medication>Zyrtec</medication>
             </if>
-            <then>disease="d2"</then> <!-- Durere -->
+            <then>disease="d2"</then>
         </rule>
-        <!-- Mai multe reguli -->
+        <!-- Mai multe reguli todo-->
     </rules>
 </medicalKnowledgeBase>

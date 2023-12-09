@@ -26,7 +26,7 @@ with tab1:
 
 with tab2:
     with tab2:
-        st.subheader("Vizualizare Istoric Medical")
+        st.subheader("Vizualizare istoric medical al unui pacient")
         patient_name_for_history = st.text_input("Introduceți numele pacientului pentru istoricul medical:")
         if st.button("Afișați Istoricul Medical"):
             patient = next((p for p in patients.values() if p['name'] == patient_name_for_history), None)
@@ -43,7 +43,7 @@ with tab2:
 
 with tab3:
     with tab3:
-        st.subheader("Vizualizare Informații Personale ale Pacientului")
+        st.subheader("Vizualizare informații personale ale unui pacient")
         patient_name_for_info = st.text_input("Introduceți numele pacientului pentru informații personale:")
         if st.button("Afișați Informațiile Personale"):
             patient = next((p for p in patients.values() if p['name'] == patient_name_for_info), None)
@@ -57,7 +57,7 @@ with tab3:
 
 with tab4:
     with tab4:
-        st.subheader("Informații despre Doctor")
+        st.subheader("Vizualizare informații despre un doctor")
         doctor_name_input = st.text_input("Introduceți numele doctorului pentru informații:")
         if st.button("Afișați Informațiile Doctorului"):
             doctor = next((d for d in doctors.values() if d['name'] == doctor_name_input), None)
@@ -74,7 +74,7 @@ with tab4:
 
 with tab5:
     with tab5:
-        st.subheader("Boli tratate de un Medicament")
+        st.subheader("Afectiuni tratate de un medicament")
         medication_input = st.text_input("Introduceți numele medicamentului:")
         if st.button("Afișați Bolile Tratate"):
             treated_diseases = get_diseases_by_medication(medication_input)
