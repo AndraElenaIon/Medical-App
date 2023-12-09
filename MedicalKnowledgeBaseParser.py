@@ -80,18 +80,3 @@ class MedicalKnowledgeBaseParser:
                 rules.append({'if': if_conditions, 'then': then_condition})
 
         return rules
-
-# # Utilizarea Parser-ului
-# xml_file = 'medical_knowledge_base.xml'  # Numele fișierului dvs. XML
-# parser = MedicalKnowledgeBaseParser(xml_file)
-#
-# # Exemplu de extragere a datelor
-# diseases = parser.get_diseases()
-# doctors = parser.get_doctors()
-# patients = parser.get_patients()
-# rules = parser.get_rules()
-#
-# print(diseases)
-# print(doctors)
-# print(patients)
-# print(rules)
