@@ -13,35 +13,124 @@
                 <symptom>mancarime</symptom>
             </symptoms>
         </disease>
-          <disease id="d3" name="Infectie">
+        <disease id="d3" name="Infectie">
             <symptoms>
                 <symptom>febra</symptom>
                 <symptom>durere locala</symptom>
             </symptoms>
         </disease>
 
-        <!-- Mai multe boli și simptome -->
+        <!-- Mai multe boli și simptome TODO-->
     </diseases>
 
     <doctors>
-        <doctor id="doc1" name="Dr. Popescu" specialty="Medicina generala"/>
-        <doctor id="doc2" name="Dr. Ionescu" specialty="Alergologie"/>
-        <!-- Mai mulți doctori -->
+        <doctor id="doc1">
+            <name>Popescu Marcel</name>
+            <contact>+32-3-602-494</contact>
+            <skills>
+                <skill>Anamneza</skill>
+                <skill>Diagnosticare diferentiala</skill>
+                <skill>Planificare a tratamentului</skill>
+                <skill>Interpretare a testelor</skill>
+            </skills>
+            <rating>4.5</rating>
+            <specialty>Medicina generala</specialty>
+        </doctor>
+        <doctor id="doc2">
+            <name>Ionescu Elena</name>
+            <contact>+32-2-555-789</contact>
+            <skills>
+                <skill>Pediatrie</skill>
+                <skill>Imunizare</skill>
+                <skill>Consiliere parentală</skill>
+                <skill>Dezvoltare copii</skill>
+            </skills>
+            <rating>4.8</rating>
+            <specialty>Pediatrie</specialty>
+        </doctor>
+        <doctor id="doc3">
+            <name>Radu Alexandru</name>
+            <contact>+32-4-123-456</contact>
+            <skills>
+                <skill>Cardiologie</skill>
+                <skill>Ecocardiografie</skill>
+                <skill>Intervenții chirurgicale</skill>
+                <skill>Managementul bolilor cardiace</skill>
+            </skills>
+            <rating>4.6</rating>
+            <specialty>Cardiologie</specialty>
+        </doctor>
+        <doctor id="doc4">
+            <name>Stanescu Irina</name>
+            <contact>+32-1-777-333</contact>
+            <skills>
+                <skill>Ginecologie</skill>
+                <skill>Obstetrică</skill>
+                <skill>Ecografie abdominală</skill>
+                <skill>Planificare familială</skill>
+            </skills>
+            <rating>4.4</rating>
+            <specialty>Ginecologie</specialty>
+        </doctor>
     </doctors>
 
     <patients>
-        <patient id="p1" name="Ion Vasile" assignedDoctor="doc1">
-            <diagnoses>
-                <diagnosis>d1</diagnosis> <!-- Referință la boala "Gripa" -->
-            </diagnoses>
+        <patient id="p1">
+            <name>Ion Vasile</name>
+            <contact>+32-6-789-123</contact>
+            <age>45</age>
+            <sex>Masculin</sex>
+            <medical_history>
+                <assignedDoctor>doc1</assignedDoctor>
+                <conditions>
+                    <condition>
+                        <name>Gripa</name>
+                        <treatment>
+                            <medication>Paracetamol</medication>
+                            <duration>7 zile</duration>
+                        </treatment>
+                    </condition>
+                </conditions>
+            </medical_history>
         </patient>
-        <patient id="p2" name="Maria Popescu" assignedDoctor="doc2">
-            <diagnoses>
-                <diagnosis>d2</diagnosis> <!-- Referință la boala "Alergie" -->
-            </diagnoses>
+
+        <patient id="p2">
+            <name>Maria Popescu</name>
+            <contact>+32-7-456-789</contact>
+            <age>32</age>
+            <sex>Feminin</sex>
+            <medical_history>
+                <assignedDoctor>doc2</assignedDoctor>
+                <conditions>
+                    <condition>
+                        <name>Alergie</name>
+                        <treatment>
+                            <medication>Zyrtec</medication>
+                            <duration>14 zile</duration>
+                        </treatment>
+                    </condition>
+                    <condition>
+                        <name>Hipertensiune</name>
+                        <treatment>
+                            <medication>Enalapril</medication>
+                            <duration>30 zile</duration>
+                        </treatment>
+                    </condition>
+                </conditions>
+            </medical_history>
         </patient>
-        <!-- Mai mulți pacienți -->
+        <!-- Alți pacienți todo-->
     </patients>
+
+    <medications>
+        <medication id="med1">
+            <name>Paracetamol</name>
+        </medication>
+        <medication id="med2">
+            <name>Zyrtec</name>
+        </medication>
+        <!-- Mai multe medicamente și afecțiuni asociate -->
+    </medications>
 
     <rules>
         <rule>
@@ -57,6 +146,31 @@
                 <symptom>mancarime</symptom>
             </if>
             <then>disease="d2"</then> <!-- Referință la boala "Alergie" -->
+        </rule>
+
+        <rule>
+            <if>
+                <medication>Paracetamol</medication>
+            </if>
+            <then>disease="d1"</then> <!-- Gripa -->
+        </rule>
+        <rule>
+            <if>
+                <medication>Paracetamol</medication>
+            </if>
+            <then>disease="d3"</then> <!-- Infectie -->
+        </rule>
+        <rule>
+            <if>
+                <medication>Paracetamol</medication>
+            </if>
+            <then>disease="d2"</then> <!-- Durere -->
+        </rule>
+        <rule>
+            <if>
+                <medication>Zyrtec</medication>
+            </if>
+            <then>disease="d2"</then> <!-- Durere -->
         </rule>
         <!-- Mai multe reguli -->
     </rules>
