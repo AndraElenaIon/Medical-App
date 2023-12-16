@@ -33,14 +33,14 @@
         </disease>
         <disease id="d6" name="Glaucom">
             <symptoms>
-                <symptom>Pierdere a vederii periferice</symptom>
-                <symptom>Durere oculară</symptom>
+                <symptom>pierdere a vederii periferice</symptom>
+                <symptom>durere oculară</symptom>
             </symptoms>
         </disease>
         <disease id="d7" name="Fractură de femur">
             <symptoms>
-                <symptom>Durere severă la picior</symptom>
-                <symptom>Imposibilitatea de a mișca piciorul</symptom>
+                <symptom>durere severă la picior</symptom>
+                <symptom>imposibilitatea de a mișca piciorul</symptom>
             </symptoms>
         </disease>
 
@@ -331,15 +331,15 @@
         </rule>
         <rule>
             <if>
-                <symptom>Piele uscată</symptom>
-                <symptom>Plăci solzoase</symptom>
+                <symptom>piele uscată</symptom>
+                <symptom>plăci solzoase</symptom>
             </if>
             <then>disease="d4"</then>
         </rule>
         <rule>
             <if>
-                <symptom>Durere de cap intensă</symptom>
-                <symptom>Sensibilitate la lumină</symptom>
+                <symptom>durere de cap intensă</symptom>
+                <symptom>sensibilitate la lumină</symptom>
             </if>
             <then>disease="d5"</then>
         </rule>
@@ -357,15 +357,15 @@
         </rule>
         <rule>
             <if>
-                <symptom>Pierdere a vederii periferice</symptom>
-                <symptom>Durere oculară</symptom>
+                <symptom>pierdere a vederii periferice</symptom>
+                <symptom>durere oculară</symptom>
             </if>
             <then>disease="d6"</then>
         </rule>
         <rule>
             <if>
-                <symptom>Durere severă la picior</symptom>
-                <symptom>Imposibilitatea de a mișca piciorul</symptom>
+                <symptom>durere severă la picior</symptom>
+                <symptom>imposibilitatea de a mișca piciorul</symptom>
             </if>
             <then>disease="d7"</then>
         </rule>
