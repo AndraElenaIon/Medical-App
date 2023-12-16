@@ -1,6 +1,6 @@
 import streamlit as st
 from MedicalDiagnosisApplication import get_diagnosis, get_diseases_by_medication, get_doctors_by_specialty, diseases, doctors, patients
-logo = 'preview.png'
+logo = 'logo.png'
 st.image(logo, width=100)
 st.title("Sistem de Interogare a Bazei de Cunoștințe Medicale")
 
