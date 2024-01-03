@@ -5,6 +5,8 @@ diseases = parser.get_diseases()
 doctors = parser.get_doctors()
 patients = parser.get_patients()
 rules = parser.get_rules()
+investigations = parser.get_investigations()
+investigation_rules = parser.get_investigation_rules()
 
 
 def get_diseases_by_medication(medication):
@@ -36,3 +38,27 @@ def get_diagnosis(selected_symptoms):
     possible_diagnoses.discard(certain_diagnosis)
 
     return certain_diagnosis, list(possible_diagnoses)
+
+
+def get_recommended_investigations(age):
+    recommended_investigations = []
+
+    for rule in investigation_rules:
+        meets_criteria = True
+
+        for condition in rule['if']:
+            attribute, comparison, value = condition
+            if attribute == "age":
+                if not eval(f"{age} {comparison} {int(value)}"):
+                    meets_criteria = False
+
+        if meets_criteria:
+            recommended_investigations.append(rule['then'])
+
+    return recommended_investigations
+
+
+
+
+
+

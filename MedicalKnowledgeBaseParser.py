@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 
+
 class MedicalKnowledgeBaseParser:
     def __init__(self, xml_file):
         self.tree = ET.parse(xml_file)
@@ -80,3 +81,47 @@ class MedicalKnowledgeBaseParser:
                 rules.append({'if': if_conditions, 'then': then_condition})
 
         return rules
+
+    def get_investigations(self):
+        investigations = {}
+        for inv in self.root.findall('investigations/investigation'):
+            inv_id = inv.get('id')
+            name = inv.get('name')
+            description = inv.find('description').text
+            required_equipment = inv.find('requiredEquipment').text
+            typical_duration = inv.find('typicalDuration').text
+
+            investigations[inv_id] = {
+                'name': name,
+                'description': description,
+                'requiredEquipment': required_equipment,
+                'typicalDuration': typical_duration
+            }
+        return investigations
+
+    def get_investigation_rules(self):
+        invest_rules = []
+        for rule in self.root.findall('invest_rules/rule'):
+            if_conditions = []
+            then_action = None
+
+            # Procesarea condițiilor "if" pentru atributele pacienților
+            for condition in rule.findall('if/patientAttribute'):
+                attribute = condition.text
+                value = rule.find(f"if/value[@for='{attribute}']").text if rule.find(
+                    f"if/value[@for='{attribute}']") is not None else None
+                comparison = rule.find(f"if/comparison[@for='{attribute}']").text if rule.find(
+                    f"if/comparison[@for='{attribute}']") is not None else None
+                if value and comparison:
+                    if_conditions.append((attribute, comparison, value))
+
+            # Procesarea acțiunii "then"
+            then_element = rule.find('then')
+            if then_element is not None:
+                then_action = then_element.text.split('=')[1].replace('"', '').strip()
+
+            invest_rules.append({'if': if_conditions, 'then': then_action})
+
+        return invest_rules
+
+

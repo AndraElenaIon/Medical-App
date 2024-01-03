@@ -1,10 +1,15 @@
 import streamlit as st
-from MedicalDiagnosisApplication import get_diagnosis, get_diseases_by_medication, get_doctors_by_specialty, diseases, doctors, patients
+from MedicalDiagnosisApplication import get_diagnosis, get_diseases_by_medication, get_doctors_by_specialty, diseases, \
+    doctors, patients, investigations, rules, get_recommended_investigations, \
+    investigation_rules
+
 logo = 'logo.png'
 st.image(logo, width=100)
 st.title("Sistem de Interogare a Bazei de Cunoștințe Medicale")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Diagnosticare", "Istoric Medical", "Informații Pacient", "Informații Doctor", "Boli și Medicamente"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+    ["Diagnosticare", "Istoric Medical", "Informații Pacient", "Informații Doctor", "Boli și Medicamente",
+     "Recomandari personalizate"])
 
 with tab1:
     with tab1:
@@ -82,3 +87,21 @@ with tab5:
                 st.write(", ".join(treated_diseases))
             else:
                 st.write("Nu există boli tratate de acest medicament in baza.")
+
+with tab6:
+    st.subheader("Obțineți recomandări de investigații pe baza vârstei")
+    age_input = st.number_input("Vârsta", min_value=0, max_value=120, step=1)
+
+    if st.button("Obțineți Recomandările"):
+        recommended_investigation_ids = get_recommended_investigations(age_input)
+        if recommended_investigation_ids:
+            st.write("Investigații recomandate:")
+            for inv_id in recommended_investigation_ids:
+                inv = investigations.get(inv_id, {})
+                st.markdown(f"**{inv.get('name', 'N/A')}**")
+                st.write(f"Descriere: {inv.get('description', 'N/A')}")
+                st.write(f"Echipament necesar: {inv.get('requiredEquipment', 'N/A')}")
+                st.write(f"Durata tipică: {inv.get('typicalDuration', 'N/A')}")
+                st.write("---")
+        else:
+            st.write("Nu sunt recomandate investigații pentru aceste criterii.")

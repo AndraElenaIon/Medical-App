@@ -43,7 +43,6 @@
                 <symptom>imposibilitatea de a mișca piciorul</symptom>
             </symptoms>
         </disease>
-
     </diseases>
 
     <doctors>
@@ -285,9 +284,62 @@
         <medication id="med6">
             <name>Ibuprofen</name>
         </medication>
-
-
     </medications>
+    <investigations>
+        <investigation id="inv1" name="Ecografie abdominală">
+            <description>Utilizată pentru a verifica organele abdominale, inclusiv ficatul, rinichii și pancreasul.
+            </description>
+            <requiredEquipment>Ecograf</requiredEquipment>
+            <typicalDuration>30 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv2" name="Electrocardiogramă (ECG)">
+            <description>Măsoară activitatea electrică a inimii pentru a detecta probleme cardiace.</description>
+            <requiredEquipment>Aparat ECG</requiredEquipment>
+            <typicalDuration>10-15 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv3" name="Test de sânge pentru glicemie">
+            <description>Verifică nivelurile de glucoză din sânge pentru a detecta diabetul.</description>
+            <requiredEquipment>Kit pentru recoltarea sângelui</requiredEquipment>
+            <typicalDuration>5 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv4" name="Rezonanță Magnetică Nucleară (RMN) cerebrală">
+            <description>Investigație imagistică detaliată a creierului pentru detectarea afecțiunilor neurologice.
+            </description>
+            <requiredEquipment>Aparat RMN</requiredEquipment>
+            <typicalDuration>60 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv5" name="Colonoscopie">
+            <description>Examinare internă a colonului pentru detectarea polipilor sau a cancerului colorectal.
+            </description>
+            <requiredEquipment>Colonoscop</requiredEquipment>
+            <typicalDuration>30-60 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv6" name="Mamografie">
+            <description>Utilizată pentru screeningul timpuriu al cancerului la sân.</description>
+            <requiredEquipment>Mamograf</requiredEquipment>
+            <typicalDuration>20 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv7" name="Spirometrie">
+            <description>Măsoară funcția pulmonară și este folosită pentru diagnosticarea și monitorizarea afecțiunilor
+                pulmonare.
+            </description>
+            <requiredEquipment>Spirometru</requiredEquipment>
+            <typicalDuration>15-30 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv8" name="Densitometrie osoasă">
+            <description>Testează densitatea osoasă și este esențială pentru diagnosticarea osteoporozei.</description>
+            <requiredEquipment>Aparat de densitometrie osoasă</requiredEquipment>
+            <typicalDuration>10-20 minute</typicalDuration>
+        </investigation>
+        <investigation id="inv9" name="Endoscopie digestivă superioară">
+            <description>Oferă o imagine detaliată a esofagului, stomacului și duodenului pentru a detecta ulcer sau
+                gastrită.
+            </description>
+            <requiredEquipment>Endoscop</requiredEquipment>
+            <typicalDuration>30-60 minute</typicalDuration>
+        </investigation>
+    </investigations>
+
 
     <rules>
         <rule>
@@ -382,5 +434,49 @@
             <then>disease="d7"</then>
         </rule>
 
+
     </rules>
+    <invest_rules>
+                <!--        rules for age based investigation recommendations-->
+        <rule>
+            <if>
+                <patientAttribute>age</patientAttribute>
+                <value>60</value>
+                <comparison>greaterThan</comparison>
+            </if>
+            <then>investigation="inv4" <!-- RMN cerebral --></then>
+        </rule>
+        <rule>
+            <if>
+                <patientAttribute>age</patientAttribute>
+                <value>50</value>
+                <comparison>greaterThan</comparison>
+            </if>
+            <then>investigation="inv1" <!-- Ecografie abdominală --></then>
+        </rule>
+        <rule>
+            <if>
+                <patientAttribute>age</patientAttribute>
+                <value>50</value>
+                <comparison>greaterThan</comparison>
+            </if>
+            <then>investigation="inv5" <!-- Colonoscopie --></then>
+        </rule>
+        <rule>
+            <if>
+                <patientAttribute>age</patientAttribute>
+                <value>40</value>
+                <comparison>greaterThan</comparison>
+            </if>
+            <then>investigation="inv6" <!-- Mamografie --></then>
+        </rule>
+        <rule>
+            <if>
+                <patientAttribute>age</patientAttribute>
+                <value>65</value>
+                <comparison>greaterThan</comparison>
+            </if>
+            <then>investigation="inv8" <!-- Densitometrie osoasă --></then>
+        </rule>
+    </invest_rules>
 </medicalKnowledgeBase>
